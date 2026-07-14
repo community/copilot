@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Copilot Onboarding Portal — 30-Day Setup Checklist</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gh-bg:        #ffffff;
+      --gh-surface:   #ffffff;
+      --gh-border:    #e1e4e8;
+      --gh-text:      #1f2328;
+      --gh-muted:     #57606a;
+      --gh-link:      #0969da;
+      --gh-green:     #08872B;
+      --gh-green-btn: #0FBF3E;
+      --gh-green-light: #dafbe1;
+      --gh-tip-bg:    #F2F5F3;
+      --radius:       6px;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: var(--gh-bg);
+      color: var(--gh-text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--gh-link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Centered container ── */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 24px 24px 16px;
+    }
+
+    header .logo {
+      width: 70px;
+      height: auto;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--gh-text);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--gh-border);
+      margin: 0 0 24px;
+    }
+
+    /* ── Progress bar ── */
+    .progress-section {
+      padding: 16px 0 24px;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .progress-header .label { font-weight: 600; font-size: 14px; }
+    .progress-header .count { font-size: 13px; color: var(--gh-muted); }
+
+    .progress-bar-track {
+      background: var(--gh-border);
+      border-radius: 99px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: var(--gh-green-btn);
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .reset-btn {
+      display: block;
+      margin: 12px auto 0;
+      font-size: 12px;
+      font-family: var(--font);
+      color: var(--gh-muted);
+      background: transparent;
+      border: 1px solid var(--gh-border);
+      border-radius: var(--radius);
+      padding: 5px 14px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .reset-btn:hover { border-color: var(--gh-muted); color: var(--gh-text); }
+
+    /* ── Week card ── */
+    .week-card {
+      border: 8px solid var(--gh-green);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      overflow: hidden;
+      background: var(--gh-surface);
+    }
+
+    .week-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 30px 14px;
+    }
+
+    .week-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 99px;
+      white-space: nowrap;
+      background: var(--gh-green-light);
+      color: var(--gh-green);
+    }
+
+    .week-title-group { flex: 1; }
+    .week-title { font-size: 16px; font-weight: 600; }
+    .week-days  { font-size: 12px; color: var(--gh-muted); margin-top: 1px; }
+
+    .week-progress-mini {
+      font-size: 12px;
+      color: var(--gh-muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .week-progress-mini strong { color: var(--gh-text); }
+
+    /* ── Task rows ── */
+    .tasks-list { list-style: none; }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 30px;
+      border-bottom: 1px solid var(--gh-border);
+      transition: background 0.15s;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-item:hover { background: rgba(0,0,0,0.015); }
+
+    .task-item.done .task-main { opacity: 0.5; }
+    .task-item.done .task-name { text-decoration: line-through; }
+
+    .task-checkbox {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 17px; height: 17px;
+      border: 2px solid var(--gh-border);
+      border-radius: 4px;
+      background: var(--gh-bg);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+      position: relative;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .task-checkbox:checked {
+      background: var(--gh-green-btn);
+      border-color: var(--gh-green-btn);
+    }
+    .task-checkbox:checked::after {
+      content: '';
+      position: absolute;
+      left: 3px; top: 0px;
+      width: 6px; height: 10px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .task-checkbox:focus-visible { outline: 2px solid var(--gh-link); outline-offset: 2px; }
+
+    .task-main { flex: 1; min-width: 0; }
+    .task-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .task-desc { font-size: 13px; color: var(--gh-muted); }
+    .task-desc .link-row { margin-top: 6px; }
+
+    .task-desc .link-row a {
+      font-size: inherit; /* matches .task-desc (13px) */
+      color: var(--gh-link);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding-bottom: 5px;
+    }
+
+    .task-desc .link-row a::before { content: '→'; }
+
+    .task-desc .link-row .tip-box {
+      display: block;
+      margin-top: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--gh-text);
+      line-height: 1.5;
+      background: var(--gh-tip-bg);
+      border: none;
+      outline: none;
+      border-radius: var(--radius);
+    }
+
+    .task-desc .link-row .tip-box strong {
+      font-weight: 600;
+    }
+
+    /* ── Milestone banner ── */
+    .milestone-banner {
+      margin: 14px 30px 20px;
+      background: none;
+      border-radius: var(--radius);
+      padding: 4px 14px 12px; /* was 6px 14px 12px */
+      font-size: 13px;
+      color: var(--gh-text);
+      display: block; /* was flex */
+    }
+
+    .milestone-banner::before {
+      content: '';
+      display: block;
+      width: 100%;                 /* was 40% */
+      height: 1px;                 /* match checklist divider thickness */
+      background: var(--gh-border);/* light gray */
+      margin: 0 0 14px;            /* match checklist item spacing rhythm */
+      border-radius: 0;            /* optional: cleaner for 1px line */
+    }
+
+    /* remove icon styling entirely */
+    .milestone-banner .mi-icon { display: none; }
+
+    .milestone-banner .mi-text strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 2px;
+      color: #08872B;
+    }
+
+    .milestone-banner .mi-text span {
+      color: inherit; /* auto black via parent color */
+      font-size: 12px;
+    }
+
+    /* ── All-done message ── */
+    #all-done {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      border: 2px dashed var(--gh-green-btn);
+      border-radius: var(--radius);
+      background: var(--gh-green-light);
+      margin-top: 8px;
+    }
+    #all-done h2 { color: var(--gh-green); font-size: 22px; margin-bottom: 8px; }
+    #all-done p  { color: var(--gh-muted); font-size: 14px; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 24px 0;
+      font-size: 12px;
+      color: var(--gh-muted);
+      line-height: 1.4;
+    }
+    footer .footer-links {
+      margin-bottom: 12px;
+    }
+    footer .footer-links a {
+      color: var(--gh-link);
+      text-decoration: none;
+    }
+    footer .footer-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ════════════════  HEADER  ════════════════ -->
+<header>
+  <img class="logo"
+    src="https://d15k2d11r6t6rl.cloudfront.net/pub/hmd2/fnngtanu/0n7/gl8/f2j/mark-github-24.png"
+    alt="GitHub Logo" />
+  <h1>Onboarding Checklist: GitHub Copilot</h1>
+</header>
+
+<hr class="divider" />
+
+<!-- ════════════════  MAIN  ════════════════ -->
+<main>
+
+  <!-- Overall progress bar -->
+  <div class="progress-section">
+    <div class="progress-header">
+      <span class="label">Overall Progress</span>
+      <span class="count" id="overall-count">0 / 12 tasks completed</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="overall-bar"></div>
+    </div>
+    <button class="reset-btn" id="reset-btn" type="button">Reset progress</button>
+  </div>
+
+  <!-- ── WEEK 1 ── -->
+  <div class="week-card">
+    <div class="week-header">
+      <span class="week-badge">Week 1</span>
+      <div class="week-title-group">
+        <div class="week-title">Set Your Foundation</div>
+        <div class="week-days">Lay the groundwork so Copilot works smoothly from day one</div>
+      </div>
+      <div class="week-progress-mini" id="w1-count"><strong>0</strong> / 3</div>
+    </div>
+
+    <ul class="tasks-list" id="w1-tasks">
+
+      <li class="task-item" data-week="1">
+        <input class="task-checkbox" type="checkbox" aria-label="Request access from your Enterprise Owner" />
+        <div class="task-main">
+          <div class="task-name">Secure the right permissions</div>
+          <div class="task-desc">
+            Reach out to your Enterprise Owner to unlock your ability to manage Copilot for your org.
+            <div class="link-row" data-tip="If you’re unsure who your Enterprise Owner is, check with your platform or DevOps admin.">
+              <a href="https://github.com/settings/copilot?ref_product=copilot&ref_type=engagement&ref_style=text" target="_blank" rel="noopener">
+                <strong>Request access </strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="1">
+        <input class="task-checkbox" type="checkbox" aria-label="Enable Copilot features" />
+        <div class="task-main">
+          <div class="task-name">Enable Copilot features</div>
+          <div class="task-desc">
+            You can control which Copilot features your users can access across their workflows.
+            <div class="link-row" data-tip="Get started with default settings. You can always refine policies as your rollout matures.">
+              <a href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization"
+                 target="_blank" rel="noopener">
+                <strong>Master set up</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="1">
+        <input class="task-checkbox" type="checkbox" aria-label="Configure networking" />
+        <div class="task-main">
+          <div class="task-name">Configure networking</div>
+          <div class="task-desc">
+            Proper network configuration ensures Copilot works reliabily for all users.
+            <div class="link-row" data-tip="This is a common blocker. Be sure to address it early.">
+              <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-organization#configure-networking"
+                 target="_blank" rel="noopener">
+                <strong>Get network ready</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="milestone-banner">
+      <div class="mi-text">
+        <strong>Steps completed? Here's the exec recap:</strong>
+        <span>Copilot has been fully configured at the org level and is ready to roll out to developers.</span>
+      </div>
+    </div>
+  </div><!-- /week 1 -->
+
+
+  <!-- ── WEEK 2 ── -->
+  <div class="week-card">
+    <div class="week-header">
+      <span class="week-badge">Week 2</span>
+      <div class="week-title-group">
+        <div class="week-title">Get Your Team Onboard</div>
+        <div class="week-days">Start small, learn quickly, and build early momentum</div>
+      </div>
+      <div class="week-progress-mini" id="w2-count"><strong>0</strong> / 3</div>
+    </div>
+
+    <ul class="tasks-list" id="w2-tasks">
+
+      <li class="task-item" data-week="2">
+        <input class="task-checkbox" type="checkbox" aria-label="Assign licenses to your first users" />
+        <div class="task-main">
+          <div class="task-name">Assign licenses to your first users</div>
+          <div class="task-desc">
+            A small pilot helps you learn what’s working before scaling broadly.
+            <div class="link-row" data-tip="Aim for a mix of teams or users who are open to trying new tools.">
+              <a href="https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/assign-licenses-to-users-in-your-organization"
+                 target="_blank" rel="noopener">
+                <strong>Grant access</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="2">
+        <input class="task-checkbox" type="checkbox" aria-label="Set up self-serve motions" />
+        <div class="task-main">
+          <div class="task-name">Set up self-serve motions</div>
+          <div class="task-desc">
+            Encourage your teams to achieve Copilot success with a self-service model that allows them to claim a license without manual approval.
+            <div class="link-row" data-tip="Self-serve license access can help you scale efficiently while minimizing admin overhead.">
+              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/assign-licenses/set-up-self-serve-licenses"
+                 target="_blank" rel="noopener">
+                <strong>Empower your teams</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="2">
+        <input class="task-checkbox" type="checkbox" aria-label="Develop an enablement plan" />
+        <div class="task-main">
+          <div class="task-name">Develop a solid enablement plan</div>
+          <div class="task-desc">
+            Create robust onboarding resources to help users start strong and increase the chances users will continue using Copilot.
+            <div class="link-row" data-tip="Your documentation should have a single goal: helping users get to their first success quickly.">
+              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/enable-developers/drive-adoption"
+                 target="_blank" rel="noopener">
+                <strong>Build early champions</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="milestone-banner">
+      <div class="mi-text">
+        <strong>Steps completed? Here's the exec recap:</strong>
+        <span>Copilot is now live with our initial pilot group, allowing us to validate setup and gather early feedback ahead of broader rollout.</span>
+      </div>
+    </div>
+  </div><!-- /week 2 -->
+
+
+  <!-- ── WEEK 3 ── -->
+  <div class="week-card">
+    <div class="week-header">
+      <span class="week-badge">Week 3</span>
+      <div class="week-title-group">
+        <div class="week-title">Build Adoption</div>
+        <div class="week-days">Turn early usage into consistent, meaningful habits</div>
+      </div>
+      <div class="week-progress-mini" id="w3-count"><strong>0</strong> / 3</div>
+    </div>
+
+    <ul class="tasks-list" id="w3-tasks">
+
+      <li class="task-item" data-week="3">
+        <input class="task-checkbox" type="checkbox" aria-label="Encourage usage in daily workflows" />
+        <div class="task-main">
+          <div class="task-name">Encourage usage in daily workflows</div>
+          <div class="task-desc">
+            Real value happens when Copilot becomes part of everyday tasks.
+            <div class="link-row" data-tip="Start with practical use cases, like writing code, refactoring, and generating tests.">
+              <a href="https://docs.github.com/en/copilot/get-started/best-practices"
+                 target="_blank" rel="noopener">
+                <strong>Share best practices</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="3">
+        <input class="task-checkbox" type="checkbox" aria-label="Expand your use cases" />
+        <div class="task-main">
+          <div class="task-name">Expand your use cases</div>
+          <div class="task-desc">
+            Visit the Copilot Cookbook to get even more ideas about how to leverage Copilot in your daily workflows.
+            <div class="link-row" data-tip="Encourage teams to try one new use case each week. It’s a simple way to build confidence and discover what works best.">
+              <a href="https://docs.github.com/en/copilot/tutorials/copilot-cookbook"
+                 target="_blank" rel="noopener">
+                <strong>Get cooking</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="3">
+        <input class="task-checkbox" type="checkbox" aria-label="Introduce agentic AI" />
+        <div class="task-main">
+          <div class="task-name">Introduce agentic AI</div>
+          <div class="task-desc">
+            Agentic experiences unlock more advanced ways to work with Copilot.
+            <div class="link-row" data-tip="Help developers move past single prompts by embracing more agentic approaches to complex tasks.">
+              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/enable-developers/integrate-ai-agents"
+                 target="_blank" rel="noopener">
+                <strong>Bring in agents</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="milestone-banner">
+      <div class="mi-text">
+        <strong>Steps completed? Here's the exec recap:</strong>
+        <span>Copilot adoption is building momentum, with developers using it in daily workflows and expanding into more advanced use cases.</span>
+      </div>
+    </div>
+  </div><!-- /week 3 -->
+
+
+  <!-- ── WEEK 4 ── -->
+  <div class="week-card">
+    <div class="week-header">
+      <span class="week-badge">Week 4</span>
+      <div class="week-title-group">
+        <div class="week-title">Measure & Scale</div>
+        <div class="week-days">Understand what's working and grow with confidence</div>
+      </div>
+      <div class="week-progress-mini" id="w4-count"><strong>0</strong> / 3</div>
+    </div>
+
+    <ul class="tasks-list" id="w4-tasks">
+
+      <li class="task-item" data-week="4">
+        <input class="task-checkbox" type="checkbox" aria-label="Review usage and adoption trends" />
+        <div class="task-main">
+          <div class="task-name">Review usage and adoption trends</div>
+          <div class="task-desc">
+            Understanding usage patterns helps you identify where Copilot is delivering value.
+            <div class="link-row" data-tip="Look for trends across teams—not just individual users.">
+              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/assign-licenses/track-usage-and-adoption"
+                 target="_blank" rel="noopener">
+                <strong>View the dashboard</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="4">
+        <input class="task-checkbox" type="checkbox" aria-label="Gather user feedback" />
+        <div class="task-main">
+          <div class="task-name">Gather user feedback</div>
+          <div class="task-desc">
+            Combining data with user feedback gives you a clearer picture of impact.
+            <div class="link-row" data-tip="Keep the ask short. Quick surveys or team check-ins work well.">
+              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/measure-success#step-4-incorporate-qualitative-feedback"
+                 target="_blank" rel="noopener">
+                <strong>Analyze sentiment</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="4">
+        <input class="task-checkbox" type="checkbox" aria-label="Expand your rollout" />
+        <div class="task-main">
+          <div class="task-name">Expand your rollout</div>
+          <div class="task-desc">
+            Scaling based on what’s working helps you grow adoption more effectively.
+            <div class="link-row" data-tip="Double down on teams and use cases where Copilot is already gaining traction.">
+              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale
+                 target="_blank" rel="noopener">
+                <strong>Build on success</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="milestone-banner">
+      <div class="mi-text">
+        <strong>Steps completed? Here's the exec recap:</strong>
+        <span>Copilot is delivering measurable value, and we are scaling adoption across additional teams based on early success.</span>
+      </div>
+    </div>
+  </div><!-- /week 4 -->
+
+  <!-- All done banner -->
+  <div id="all-done" role="status">
+    <h2>🎉 Congratulations!</h2>
+    <p>You've completed the 30-Day GHAS Setup Checklist.<br>
+    Your organization is on its way to a stronger security posture!</p>
+  </div>
+
+</main>
+
+<hr class="divider" />
+
+<!-- ════════════════  FOOTER  ════════════════ -->
+<footer>
+  <div class="footer-links">
+    <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Privacy Policy</a>
+    &nbsp;|&nbsp;
+    <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service">Terms of Service</a>
+    &nbsp;|&nbsp;
+    <a href="https://support.github.com/">Support Portal</a>
+  </div>
+  &copy; 2025 GitHub, Inc. All rights reserved.<br />
+  GitHub, Inc.<br />
+  88 Colin P Kelly Jr St.<br />
+  San Francisco, CA 94107
+</footer>
+
+</div><!-- /.container -->
+
+<script>
+  (function() {
+    'use strict';
+
+    /* ── Unique visitor ID ── */
+    function getVisitorId() {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('id');
+      if (!id) {
+        id = crypto.randomUUID ? crypto.randomUUID() :
+          'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0;
+            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+          });
+        params.set('id', id);
+        history.replaceState(null, '', '?' + params.toString());
+      }
+      return id;
+    }
+
+    var visitorId   = getVisitorId();
+    var STORAGE_KEY = 'ghas-checklist-' + visitorId;
+    var checkboxes  = Array.from(document.querySelectorAll('.task-checkbox'));
+    var TOTAL       = checkboxes.length;
+
+    /* ── Persist & restore ── */
+    function save() {
+      var state = checkboxes.map(function(cb) { return cb.checked; });
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) { /* storage full or unavailable */ }
+    }
+
+    function load() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        var state = JSON.parse(raw);
+        checkboxes.forEach(function(cb, i) {
+          if (state[i]) { cb.checked = true; }
+        });
+      } catch (e) { /* ignore corrupt data */ }
+    }
+
+    /* ── UI update ── */
+    function update() {
+      var total = 0;
+      [1, 2, 3, 4].forEach(function(w) {
+        var items = document.querySelectorAll('.task-item[data-week="' + w + '"]');
+        var done = 0;
+        items.forEach(function(li) {
+          var cb = li.querySelector('.task-checkbox');
+          if (cb.checked) { done++; total++; li.classList.add('done'); }
+          else            { li.classList.remove('done'); }
+        });
+        var countEl = document.getElementById('w' + w + '-count');
+        countEl.innerHTML = '<strong>' + done + '</strong> / ' + items.length;
+      });
+
+      var pct = Math.round((total / TOTAL) * 100);
+      document.getElementById('overall-bar').style.width = pct + '%';
+      document.getElementById('overall-count').textContent =
+        total + ' / ' + TOTAL + ' tasks completed';
+
+      document.getElementById('all-done').style.display =
+        total === TOTAL ? 'block' : 'none';
+    }
+
+    /* ── Reset handler ── */
+    document.getElementById('reset-btn').addEventListener('click', function() {
+      checkboxes.forEach(function(cb) { cb.checked = false; });
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      save();
+      update();
+    });
+
+    /* ── Wire up checkbox events ── */
+    checkboxes.forEach(function(cb) {
+      cb.addEventListener('change', function() { save(); update(); });
+    });
+
+    function renderTips() {
+      var rows = Array.from(document.querySelectorAll('.task-desc .link-row[data-tip]'));
+      rows.forEach(function(row) {
+        if (row.querySelector('.tip-box')) return;
+        var text = row.getAttribute('data-tip');
+        if (!text) return;
+
+        var box = document.createElement('div');
+        box.className = 'tip-box';
+
+        var label = document.createElement('strong');
+        label.textContent = '💡 Tip:';
+        box.appendChild(label);
+        box.appendChild(document.createTextNode(' ' + text));
+
+        row.appendChild(box);
+      });
+    }
+
+    /* ── Init ── */
+    renderTips();
+    load();
+    update();
+  })();
+</script>
+</body>
+</html>
