@@ -342,14 +342,14 @@
     <ul class="tasks-list" id="w1-tasks">
 
       <li class="task-item" data-week="1">
-        <input class="task-checkbox" type="checkbox" aria-label="Request access from your Enterprise Owner" />
+        <input class="task-checkbox" type="checkbox" aria-label="Define success" />
         <div class="task-main">
-          <div class="task-name">Secure the right permissions</div>
+          <div class="task-name">Define success</div>
           <div class="task-desc">
-            Reach out to your Enterprise Owner to unlock your ability to manage Copilot for your org.
-            <div class="link-row" data-tip="If you’re unsure who your Enterprise Owner is, check with your platform or DevOps admin.">
-              <a href="https://github.com/settings/copilot?ref_product=copilot&ref_type=engagement&ref_style=text" target="_blank" rel="noopener">
-                <strong>Request access </strong>
+            Agree on the outcomes and metrics that define a successful Copilot rollout, and capture your baseline before you start. 
+            <div class="link-row" data-tip="Pick two to three measurable goals and record baseline numbers before rollout.">
+              <a href="https://learn.github.com/product-guides/github-copilot/get-started/define-success" target="_blank" rel="noopener">
+                <strong>Set intentions </strong>
               </a>
             </div>
           </div>
@@ -357,15 +357,15 @@
       </li>
 
       <li class="task-item" data-week="1">
-        <input class="task-checkbox" type="checkbox" aria-label="Enable Copilot features" />
+        <input class="task-checkbox" type="checkbox" aria-label="Confirm entitlement and enterprise policies" />
         <div class="task-main">
-          <div class="task-name">Enable Copilot features</div>
+          <div class="task-name">Confirm entitlement and enterprise policies</div>
           <div class="task-desc">
-            You can control which Copilot features your users can access across their workflows.
-            <div class="link-row" data-tip="Get started with default settings. You can always refine policies as your rollout matures.">
-              <a href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization"
+            Verify your subscription is provisioned and set enterprise-level policies before anything else, since they govern what every org beneath them can do.
+            <div class="link-row" data-tip="Enterprise policies override org settings, so you'll want to pay close attention to your choices here.">
+              <a href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-enterprise/manage-enterprise-policies"
                  target="_blank" rel="noopener">
-                <strong>Master set up</strong>
+                <strong>Manage policies</strong>
               </a>
             </div>
           </div>
@@ -373,15 +373,63 @@
       </li>
 
       <li class="task-item" data-week="1">
-        <input class="task-checkbox" type="checkbox" aria-label="Configure networking" />
+        <input class="task-checkbox" type="checkbox" aria-label="Understand Copilot billing and set budgets" />
         <div class="task-main">
-          <div class="task-name">Configure networking</div>
+          <div class="task-name">Understand Copilot billing and set budgets</div>
           <div class="task-desc">
-            Proper network configuration ensures Copilot works reliabily for all users.
-            <div class="link-row" data-tip="This is a common blocker. Be sure to address it early.">
-              <a href="https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/enable-copilot/set-up-for-organization#configure-networking"
+            Learn how licensing and usage are billed so you can budget and control spend before you scope your rollout.
+            <div class="link-row" data-tip="Set budgets and alerts before rolling out widely.">
+              <a href="https://learn.github.com/product-guides/github-copilot/get-started/understanding-copilot-budgeting"
                  target="_blank" rel="noopener">
-                <strong>Get network ready</strong>
+                <strong>Avoid surprises</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="1">
+        <input class="task-checkbox" type="checkbox" aria-label="Create a rollout plan" />
+        <div class="task-main">
+          <div class="task-name">Create a rollout plan</div>
+          <div class="task-desc">
+            Decide who gets Copilot and in what order — start with a pilot group before going broad.
+            <div class="link-row" data-tip="Begin with an eager pilot team, learn, then expand.">
+              <a href="https://learn.github.com/product-guides/github-copilot/get-started/create-a-rollout-plan"
+                 target="_blank" rel="noopener">
+                <strong>Start small</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="1">
+        <input class="task-checkbox" type="checkbox" aria-label="Enable Copilot policies" />
+        <div class="task-main">
+          <div class="task-name">Enable Copilot policies</div>
+          <div class="task-desc">
+            Choose which Copilot features and models are available to your licensed users at the organization level.
+            <div class="link-row" data-tip="You may also enable third-party coding agents during this step.">
+              <a href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-policies"
+                 target="_blank" rel="noopener">
+                <strong>Take control</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="1">
+        <input class="task-checkbox" type="checkbox" aria-label="Configure networking (if required)" />
+        <div class="task-main">
+          <div class="task-name">Configure networking (if required)</div>
+          <div class="task-desc">
+            Set up proxy access and install custom certificates so Copilot works on your corporate network.
+            <div class="link-row" data-tip="Install your root CA certificate, but don't disable SSL verification.">
+              <a href="https://docs.github.com/en/copilot/how-tos/configure-personal-settings/configure-network-settings"
+                 target="_blank" rel="noopener">
+                <strong>Connect your network</strong>
               </a>
             </div>
           </div>
@@ -393,7 +441,7 @@
     <div class="milestone-banner">
       <div class="mi-text">
         <strong>Steps completed? Here's the exec recap:</strong>
-        <span>Copilot has been fully configured at the org level and is ready to roll out to developers.</span>
+        <span>Copilot is configured and access is live. We've defined what success looks like, planned our rollout, and put the right policies and licenses in place so we're set up to deploy on a secure, governed foundation.</span>
       </div>
     </div>
   </div><!-- /week 1 -->
@@ -413,13 +461,13 @@
     <ul class="tasks-list" id="w2-tasks">
 
       <li class="task-item" data-week="2">
-        <input class="task-checkbox" type="checkbox" aria-label="Assign licenses to your first users" />
+        <input class="task-checkbox" type="checkbox" aria-label="Manage access to GitHub Copilot" />
         <div class="task-main">
-          <div class="task-name">Assign licenses to your first users</div>
+          <div class="task-name">Manage access to GitHub Copilot</div>
           <div class="task-desc">
-            A small pilot helps you learn what’s working before scaling broadly.
-            <div class="link-row" data-tip="Aim for a mix of teams or users who are open to trying new tools.">
-              <a href="https://docs.github.com/en/copilot/managing-copilot/managing-github-copilot-in-your-organization/assign-licenses-to-users-in-your-organization"
+            Assign and manage Copilot licenses so the right people and teams have access. 
+            <div class="link-row" data-tip="Give access by team to keep licensing organized and easy to track.">
+              <a href="https://docs.github.com/en/copilot/how-tos/administer-copilot/manage-for-organization/manage-access"
                  target="_blank" rel="noopener">
                 <strong>Grant access</strong>
               </a>
@@ -429,15 +477,15 @@
       </li>
 
       <li class="task-item" data-week="2">
-        <input class="task-checkbox" type="checkbox" aria-label="Set up self-serve motions" />
+        <input class="task-checkbox" type="checkbox" aria-label="Enable your team" />
         <div class="task-main">
-          <div class="task-name">Set up self-serve motions</div>
+          <div class="task-name">Enable your team</div>
           <div class="task-desc">
-            Encourage your teams to achieve Copilot success with a self-service model that allows them to claim a license without manual approval.
-            <div class="link-row" data-tip="Self-serve license access can help you scale efficiently while minimizing admin overhead.">
-              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/assign-licenses/set-up-self-serve-licenses"
+            Give developers the training and resources to use Copilot effectively. 
+            <div class="link-row" data-tip="Share quick-start guides and a channel for questions to speed adoption.">
+              <a href="https://learn.github.com/product-guides/github-copilot/get-started/create-an-enablement-plan"
                  target="_blank" rel="noopener">
-                <strong>Empower your teams</strong>
+                <strong>Empower people</strong>
               </a>
             </div>
           </div>
@@ -445,15 +493,15 @@
       </li>
 
       <li class="task-item" data-week="2">
-        <input class="task-checkbox" type="checkbox" aria-label="Develop an enablement plan" />
+        <input class="task-checkbox" type="checkbox" aria-label="Encourage usage in daily workflows" />
         <div class="task-main">
-          <div class="task-name">Develop a solid enablement plan</div>
+          <div class="task-name">Encourage usage in daily workflows</div>
           <div class="task-desc">
-            Create robust onboarding resources to help users start strong and increase the chances users will continue using Copilot.
-            <div class="link-row" data-tip="Your documentation should have a single goal: helping users get to their first success quickly.">
-              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/enable-developers/drive-adoption"
+            Real value happens when Copilot becomes part of everyday tasks. 
+            <div class="link-row" data-tip="Start with practical use cases, like writing code, refactoring, and generating tests.">
+              <a href="https://docs.github.com/en/copilot/get-started/best-practices"
                  target="_blank" rel="noopener">
-                <strong>Build early champions</strong>
+                <strong>Build adoption</strong>
               </a>
             </div>
           </div>
@@ -465,7 +513,7 @@
     <div class="milestone-banner">
       <div class="mi-text">
         <strong>Steps completed? Here's the exec recap:</strong>
-        <span>Copilot is now live with our initial pilot group, allowing us to validate setup and gather early feedback ahead of broader rollout.</span>
+        <span>eams are enabled and using Copilot in daily work. Developers have the training they need, and we understand the billing model — so adoption starts with cost visibility from day one.</span>
       </div>
     </div>
   </div><!-- /week 2 -->
@@ -485,28 +533,12 @@
     <ul class="tasks-list" id="w3-tasks">
 
       <li class="task-item" data-week="3">
-        <input class="task-checkbox" type="checkbox" aria-label="Encourage usage in daily workflows" />
-        <div class="task-main">
-          <div class="task-name">Encourage usage in daily workflows</div>
-          <div class="task-desc">
-            Real value happens when Copilot becomes part of everyday tasks.
-            <div class="link-row" data-tip="Start with practical use cases, like writing code, refactoring, and generating tests.">
-              <a href="https://docs.github.com/en/copilot/get-started/best-practices"
-                 target="_blank" rel="noopener">
-                <strong>Share best practices</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="task-item" data-week="3">
         <input class="task-checkbox" type="checkbox" aria-label="Expand your use cases" />
         <div class="task-main">
           <div class="task-name">Expand your use cases</div>
           <div class="task-desc">
             Visit the Copilot Cookbook to get even more ideas about how to leverage Copilot in your daily workflows.
-            <div class="link-row" data-tip="Encourage teams to try one new use case each week. It’s a simple way to build confidence and discover what works best.">
+            <div class="link-row" data-tip="Encourage teams to try one new use case each week. It's a simple way to build confidence and discover what works best.">
               <a href="https://docs.github.com/en/copilot/tutorials/copilot-cookbook"
                  target="_blank" rel="noopener">
                 <strong>Get cooking</strong>
@@ -517,15 +549,31 @@
       </li>
 
       <li class="task-item" data-week="3">
-        <input class="task-checkbox" type="checkbox" aria-label="Introduce agentic AI" />
+        <input class="task-checkbox" type="checkbox" aria-label="Understand agentic governance" />
         <div class="task-main">
-          <div class="task-name">Introduce agentic AI</div>
+          <div class="task-name">Understand agentic governance</div>
           <div class="task-desc">
-            Agentic experiences unlock more advanced ways to work with Copilot.
-            <div class="link-row" data-tip="Help developers move past single prompts by embracing more agentic approaches to complex tasks.">
-              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/enable-developers/integrate-ai-agents"
+            Create a foundation of strong governance, shared knowledge, and clear feedback loops to get the most out of agents.  
+            <div class="link-row" data-tip="Define who can use agents, and on which repos, before scaling wider.">
+              <a href="https://musical-adventure-mn94o9e.pages.github.io/GHAES_UnderNDA.html"
                  target="_blank" rel="noopener">
                 <strong>Bring in agents</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="3">
+        <input class="task-checkbox" type="checkbox" aria-label="Build a lasting Copilot community" />
+        <div class="task-main">
+          <div class="task-name">Build a lasting Copilot community </div>
+          <div class="task-desc">
+            Adoption sticks when developers have a place to share wins, tips, and questions. Name internal champions and give teams a channel to keep learning from each other.
+            <div class="link-row" data-tip="Recognize power users as champions. Peer momentum sustains adoption better than top-down mandates.">
+              <a href="https://learn.github.com/product-guides/github-copilot/accelerate-usage/build-the-internal-copilot-community"
+                 target="_blank" rel="noopener">
+                <strong>Establish champions</strong>
               </a>
             </div>
           </div>
@@ -537,7 +585,7 @@
     <div class="milestone-banner">
       <div class="mi-text">
         <strong>Steps completed? Here's the exec recap:</strong>
-        <span>Copilot adoption is building momentum, with developers using it in daily workflows and expanding into more advanced use cases.</span>
+        <span>Copilot adoption is building momentum, with developers using it in daily workflows and expanding into more advanced use cases, and we're implementing the right guardrails as usage grows.</span>
       </div>
     </div>
   </div><!-- /week 3 -->
@@ -557,15 +605,31 @@
     <ul class="tasks-list" id="w4-tasks">
 
       <li class="task-item" data-week="4">
+        <input class="task-checkbox" type="checkbox" aria-label="Collect user feedback" />
+        <div class="task-main">
+          <div class="task-name">Collect user feedback</div>
+          <div class="task-desc">
+            Pairing data with feedback gives you a clearer picture of impact. 
+            <div class="link-row" data-tip="Keep the ask short. Quick surveys or team check-ins work well.">
+              <a href="https://learn.github.com/product-guides/github-copilot/accelerate-usage/set-up-a-feedback-mechanism"
+                 target="_blank" rel="noopener">
+                <strong>Gather learnings</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="task-item" data-week="4">
         <input class="task-checkbox" type="checkbox" aria-label="Review usage and adoption trends" />
         <div class="task-main">
           <div class="task-name">Review usage and adoption trends</div>
           <div class="task-desc">
-            Understanding usage patterns helps you identify where Copilot is delivering value.
-            <div class="link-row" data-tip="Look for trends across teams—not just individual users.">
-              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/assign-licenses/track-usage-and-adoption"
+            Usage patterns show you where Copilot is delivering value against your original goals.
+            <div class="link-row" data-tip="Look for trends across teams, not just individual users.">
+              <a href="https://docs.github.com/en/copilot/concepts/copilot-usage-metrics/copilot-metrics"
                  target="_blank" rel="noopener">
-                <strong>View the dashboard</strong>
+                <strong>Analyze metrics</strong>
               </a>
             </div>
           </div>
@@ -573,31 +637,15 @@
       </li>
 
       <li class="task-item" data-week="4">
-        <input class="task-checkbox" type="checkbox" aria-label="Gather user feedback" />
+        <input class="task-checkbox" type="checkbox" aria-label="Optimize use" />
         <div class="task-main">
-          <div class="task-name">Gather user feedback</div>
+          <div class="task-name">Optimize use</div>
           <div class="task-desc">
-            Combining data with user feedback gives you a clearer picture of impact.
-            <div class="link-row" data-tip="Keep the ask short. Quick surveys or team check-ins work well.">
-              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/measure-success#step-4-incorporate-qualitative-feedback"
+             Improve agent quality and token optimization.
+            <div class="link-row" data-tip="Refine prompts and custom instructions to raise quality and cut wasted tokens.">
+              <a href="https://learn.github.com/product-guides/github-copilot/accelerate-usage/improve-agent-quality-and-token-optimization"
                  target="_blank" rel="noopener">
-                <strong>Analyze sentiment</strong>
-              </a>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li class="task-item" data-week="4">
-        <input class="task-checkbox" type="checkbox" aria-label="Expand your rollout" />
-        <div class="task-main">
-          <div class="task-name">Expand your rollout</div>
-          <div class="task-desc">
-            Scaling based on what’s working helps you grow adoption more effectively.
-            <div class="link-row" data-tip="Double down on teams and use cases where Copilot is already gaining traction.">
-              <a href="https://docs.github.com/en/copilot/tutorials/roll-out-at-scale
-                 target="_blank" rel="noopener">
-                <strong>Build on success</strong>
+                <strong>Budget smartly</strong>
               </a>
             </div>
           </div>
@@ -609,7 +657,7 @@
     <div class="milestone-banner">
       <div class="mi-text">
         <strong>Steps completed? Here's the exec recap:</strong>
-        <span>Copilot is delivering measurable value, and we are scaling adoption across additional teams based on early success.</span>
+        <span>With setup complete, we're now in a steady rhythm of monitoring value and improving. We're tracking adoption against our original goals, acting on user feedback, and sustaining momentum across additional teams.</span>
       </div>
     </div>
   </div><!-- /week 4 -->
@@ -617,8 +665,8 @@
   <!-- All done banner -->
   <div id="all-done" role="status">
     <h2>🎉 Congratulations!</h2>
-    <p>You've completed the 30-Day GHAS Setup Checklist.<br>
-    Your organization is on its way to a stronger security posture!</p>
+    <p>You've completed the 30-Day GitHub Copilot Setup Checklist.<br>
+    Your organization is on its way to a better productivity!</p>
   </div>
 
 </main>
